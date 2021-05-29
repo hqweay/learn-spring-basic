@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 业务类（被代理的类）-->
+    <bean id="coder" class="net.leay.springAOP.spring.Coder"/>
+    <!-- 切面类 -->
+    <bean id="relaxAspect" class="net.leay.springAOP.spring.RelaxAspect"/>
+
+    <bean id="strongCoder" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 被代理的实现类的接口 -->
+        <property name="interfaces" value="net.leay.springAOP.spring.Job"/>
+        <!-- 设置被代理的类，引用bean-id="coder"（前面定义了）-->
+        <property name="target" ref="coder"/>
+        <!-- 设置切面类，引用bean-id="relaxAspect"（前面定义了）-->
+        <property name="interceptorNames" value="relaxAspect"/>
+        <!-- 是否使用cglib字节码增强，否则使用Proxy动态代理 -->
+        <property name="optimize" value="false"/>
+    </bean>
+</beans>

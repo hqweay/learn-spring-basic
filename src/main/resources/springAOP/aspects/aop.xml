@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--将基本对象交给spring管理-->
+    <bean id="coder" class="net.leay.springAOP.aspects.Coder"/>
+    <bean id="relax" class="net.leay.springAOP.aspects.Relax"/>
+
+    <!--配置AOP操作-->
+    <aop:config>
+        <!--配置切入点:使用表达式，在实际的方法上添加通知的方法称之为切入点-->
+        <aop:pointcut id="workingCoder" expression="execution(* net.leay.springAOP.aspects.Coder.work(..))"/>
+
+        <!--配置切面：把增强用到方法-->
+        <aop:aspect ref="relax">
+            <!--配置增强类型   method:增强类中的那个方法作为前置增强-->
+            <aop:before method="drink" pointcut-ref="workingCoder"/>
+            <!--
+                aop:before:前置通知
+                aop:after 后置通知
+                aop:after-returning:最终通知
+                aop:after-throwing:异常通知
+                aop:around：环绕通知
+            -->
+        </aop:aspect>
+    </aop:config>
+</beans>
