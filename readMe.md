@@ -10,6 +10,7 @@
   - [x] 注入方式：Constructor 注入、Setter 注入、注解注入
   - [x] 自动扫描、自动扫描与注解注入关系
   - [x] 作用域：单例与多例
+  - [x] Bean 的生命周期
 
 - [x] springAOP
   - [x] 使用 Spring-AOP + Aspects 实现
