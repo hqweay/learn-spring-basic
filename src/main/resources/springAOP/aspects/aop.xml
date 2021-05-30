@@ -13,12 +13,12 @@
 
     <!--配置AOP操作-->
     <aop:config>
-        <!--配置切入点:使用表达式，在实际的方法上添加通知的方法称之为切入点-->
+        <!--配置切入点:使用表达式，在实际的方法上添加通知的方法称之为切入点 pointCut-->
         <aop:pointcut id="workingCoder" expression="execution(* net.leay.springAOP.aspects.Coder.work(..))"/>
 
-        <!--配置切面：把增强用到方法-->
+        <!--配置切面：把增强用到方法 advice 整个又是一个 aspect-->
         <aop:aspect ref="relax">
-            <!--配置增强类型   method:增强类中的那个方法作为前置增强-->
+            <!--配置增强类型   method:增强类中的那个方法作为前置增强 joinPonit-->
             <aop:before method="drink" pointcut-ref="workingCoder"/>
             <!--
                 aop:before:前置通知
